@@ -1,0 +1,20 @@
+
+.controlsItem{
+    flex: 1 1 auto;
+}
+
+
+.controlsContainer{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    margin-left: 16px;
+    margin-right: 16px;
+    align-items: center;
+}
+
+.modalControlsContainer{
+    margin: 16px
+}
+
