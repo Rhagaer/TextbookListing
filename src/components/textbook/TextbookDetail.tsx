@@ -28,9 +28,9 @@ export const TextbookDetail = (props: IProps) => (
       <img src={props.textbook.image} alt="" />
     </CardMedia>
     <CardContent>
-      {props.withName && (
-        <Typography variant="title">{props.textbook.name}</Typography>
-      )}
+
+      <Typography variant="title">{props.textbook.name}</Typography>
+
       <Typography variant={"subheading"}>{props.textbook.author}</Typography>
       <Typography variant={"body2"}>
         {props.textbook.isbn}

@@ -6,21 +6,39 @@ import { Typography, Button, Icon, IconButton, List, Dialog, DialogTitle, Dialog
 import * as styles from "./ListingDetail.css"
 import FilterList from "@material-ui/icons/FilterList";
 import ViewList from "@material-ui/icons/ViewList"
+import { User } from "../../model/User";
+import { Listing } from "../../model/Listing";
 
 
-let textbook = new Textbook("Name", "Author", "ISBN", 5, "Test")
 
 interface IState {
     showPopup: boolean;
     selectedUniversity: string;
+    filterLikeNew: boolean;
+    filterVeryGood: boolean;
+    filterGood: boolean;
+    filterAcceptable: boolean;
 
 }
 
-export class ListingDetail extends React.Component<any, IState> {
+interface IProps {
+    textbook: Textbook;
+    sellers: User[];
+    listings: Listing[];
+}
+
+export class ListingDetail extends React.Component<IProps, IState> {
 
     constructor(props: any) {
         super(props);
-        this.state = { showPopup: false, selectedUniversity: "" }
+        this.state = {
+            showPopup: false,
+            selectedUniversity: "",
+            filterLikeNew: true,
+            filterVeryGood: true,
+            filterGood: true,
+            filterAcceptable: true
+        }
     }
 
 
@@ -31,7 +49,6 @@ export class ListingDetail extends React.Component<any, IState> {
     }
 
     handleUniversitySelected = (event: any) => {
-
         this.setState({ selectedUniversity: event.target.value })
     }
 
@@ -62,7 +79,7 @@ export class ListingDetail extends React.Component<any, IState> {
                                 <Checkbox />}
                             label="Acceptable" />
 
-                        <Typography variant="subheading" style={{marginTop: 16}}>Filter By University</Typography>
+                        <Typography variant="subheading" style={{ marginTop: 16 }}>Filter By University</Typography>
                         <Select
                             fullWidth
                             onChange={this.handleUniversitySelected}
@@ -82,7 +99,7 @@ export class ListingDetail extends React.Component<any, IState> {
 
                     </div>
                 </Dialog>
-                <TextbookDetail textbook={textbook} />
+                <TextbookDetail textbook={this.props.textbook} />
                 <div className={styles.controlsContainer}>
                     <Typography variant={"headline"} className={styles.controlsItem}>
                         Sellers
@@ -97,7 +114,7 @@ export class ListingDetail extends React.Component<any, IState> {
                         <ViewList />
                     </IconButton>
                 </div>
-                <SellerList />
+                <SellerList sellers={this.props.sellers} listings={this.props.listings} />
             </div >
         )
     }
